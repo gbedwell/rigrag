@@ -1,0 +1,26 @@
+{
+    "id": "51C10755",
+    "path": "~/Documents/github/rigrag/R/cso_plot.R",
+    "project_path": "R/cso_plot.R",
+    "type": "r_source",
+    "hash": "1182519180",
+    "contents": "",
+    "dirty": false,
+    "created": 1606153606875.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "cursorPosition": "85,60",
+        "scrollLine": "67",
+        "source_window_id": "",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1611065150,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1611065150597,
+    "read_only": false,
+    "read_only_alternatives": []
+}

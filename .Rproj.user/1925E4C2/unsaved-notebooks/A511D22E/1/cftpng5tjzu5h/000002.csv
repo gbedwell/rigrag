@@ -1,0 +1,3 @@
+"0","wt.samples <- wt.samples %>%"
+"0","  dplyr::arrange(match(sample, c(""HEK293T #1"",""HEK293T #2"",""HEK293T #3"",""Jurkat #1"",""Jurkat #2"","
+"0","                                 ""Jurkat #3"",""PBMC"",""EC Primary CD4+"",""HIV Neg Primary CD4+"",""MDM"")))"

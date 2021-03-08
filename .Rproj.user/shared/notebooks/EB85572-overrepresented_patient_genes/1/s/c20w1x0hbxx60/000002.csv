@@ -1,0 +1,4 @@
+"0","figure.directory <- ""figures"""
+"0","if (!dir.exists(figure.directory)) { dir.create(figure.directory) }"
+"0","file.directory <- ""output_files"""
+"0","if (!dir.exists(file.directory)) { dir.create(file.directory) }"

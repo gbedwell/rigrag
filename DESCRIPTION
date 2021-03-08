@@ -1,0 +1,31 @@
+Package: rigrag
+Title: Identification of Recurrently Targeted Genes and Recurrently Avoided Genes During HIV-1 Infection
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "Greg",
+           family = "Bedwell",
+           role = c("aut", "cre"),
+           email = "gregoryjbedwell@gmail.com")
+Maintainer: Greg Bedwell <gregoryjbedwell@gmail.com>
+Depends: R (>= 3.5.1), scales, data.table, forcats, dplyr, ggplot2, tidyr, purrr, mgsub
+Description: rigrag was written to aid in the characterization of recurrent integration genes (RIGs) and recurrent avoided genes (RAGs) during HIV-1 infection.
+    This package is intended to be run following intersection of integration site coordinates with a relevant gene annotation file.
+    Examples of these upstream steps can be found within the 'example_files/intersection_example.sh' file at https://github.com/gbedwell/random_integration.
+    Note that the intersection scheme described above adds a column containing the total number of integration sites from the original integration site file.
+    To run rigrag, the user needs to define a directory containing all of the integration site files to be analyzed.
+    These files can be easily imported using built-in functions if their names share a common pattern (this is recommended).
+    Following import, the user needs to define a list of sample identifiers for each integration site file.
+    It is important that these identifiers are in the same order as the files in the file list.
+    Spaces, pound signs, and plus signs are allowed in the sample identifiers. Any file names of files output with rigrag functions will be cleaned to remove these characters.
+    rigrag contains functions to easily calculate all of the relevant model parameters and boundaries for every sample in the analysis.
+    Models can be generated for either random fragmentation or for pattern fragmentation (i.e. restriction digestion).
+    The specific enzyme cocktail must be specified.
+    Additional pattern fragmentation models for different enzyme combinations will be added over time.
+    In addition, rigrag automatically categorizes outlier types based on the sample-specific model parameters.
+    rigrag functions have been written to conveniently output particular files and plots as desired to eliminate potentially troublesome plotting issues.
+    For examples of rigrag plots, see Bedwell, et al. Phenomenological Modelling of Random Integration Identifies Genes Recurrently Targeted and Recurrently Avoided in Acute and Persistent HIV-1 Infection. JOURNAL HERE. 2020.
+    Alternatively, example rigrag usage is provided in the 'gbedwell/random_integration/example_files' GitHub repository.
+License: GPL (>=2)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1

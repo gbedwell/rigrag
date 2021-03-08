@@ -1,0 +1,26 @@
+#' Mean integration frequency values and their standard deviation from in vitro infections
+#'
+#' Derived from all genes integrated into 4 or more times in the in vitro datasets.
+#' Contains 1,924 RIGs and 6,137 Non-RIGs. 8,061 genes in total.
+#'
+#' @docType data
+#'
+#' @usage data(mean_int_freq)
+#'
+#' @format A dataframe with 8,061 rows and 6 variables:
+#' \describe{
+#'   \item{gene.name}{The name of the corresponding gene}
+#'   \item{mean.freq}{The mean integration frequency into that gene}
+#'   \item{sd.freq}{The standard deviation of integration frequency into that gene}
+#'   \item{gene.length}{The length of that gene}
+#'   \item{CSO}{The cross-sample occurrence of that gene in the data used to generate mean and SD values}
+#'   \item{gene.population}{Denotes whether the gene is classified as a RIG or Non-RIG}}
+#'
+#'
+#' @keywords datasets
+#'
+#' @references Bedwell, et al. In preparation.
+#' (\href{https://pubmed.ncbi.nlm.nih.gov/?term=Bedwell+GJ}{PubMed})
+#'
+#'
+"mean_int_freq"

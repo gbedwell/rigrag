@@ -1,0 +1,26 @@
+{
+    "id": "2D19E7F4",
+    "path": "~/Documents/github/rigrag/R/patient_overrep.R",
+    "project_path": "R/patient_overrep.R",
+    "type": "r_source",
+    "hash": "3758449779",
+    "contents": "",
+    "dirty": false,
+    "created": 1606153610126.0,
+    "source_on_save": false,
+    "relative_order": 10,
+    "properties": {
+        "cursorPosition": "14,52",
+        "scrollLine": "0",
+        "tempName": "Untitled1",
+        "Source": "Source"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1598621780,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1598621780,
+    "read_only": false,
+    "read_only_alternatives": []
+}

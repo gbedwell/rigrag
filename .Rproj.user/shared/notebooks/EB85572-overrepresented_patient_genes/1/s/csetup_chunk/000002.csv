@@ -1,0 +1,2 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"0","knitr::opts_knit$set(root.dir = ""~/Documents/scripts/bioinformatics/int_sites/int_site_analysis/cell_types/"")"
