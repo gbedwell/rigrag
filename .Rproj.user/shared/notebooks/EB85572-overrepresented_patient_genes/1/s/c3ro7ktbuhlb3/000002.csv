@@ -1,3 +1,0 @@
-"0","files <- rigrag::generate_file_list(directory=""wt_int_site_bed"", pattern=""*genic.bed"")"
-"0","sample.ids <- list(""EC Primary CD4+"", ""HEK293T #1"", ""HEK293T #2"", ""Jurkat #1"","
-"0","                   ""Jurkat #2"", ""Jurkat #3"", ""MDM"", ""HIV Neg Primary CD4+"", ""Patient Acute"")"

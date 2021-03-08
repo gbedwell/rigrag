@@ -1,8 +1,0 @@
-"0","write.table(chronic.rigs.overlap %>% dplyr::filter(z.score >= chronic.rigs.overlap.uw) %>% "
-"0","              dplyr::select(gene.name, z.score, q.value, cso), "
-"0","            file=paste0(getwd(), ""/hg_annotations/sample_data/chronic_rigs_overlap_zscores.txt""),"
-"0","            sep=""\t"",row.names=FALSE, quote=FALSE, col.names = TRUE)"
-"0","write.table(acute.rigs.overlap %>% dplyr::filter(z.score >= chronic.rigs.overlap.uw) %>% "
-"0","              dplyr::select(gene.name, z.score, q.value, cso), "
-"0","            file=paste0(getwd(), ""/hg_annotations/sample_data/acute_rigs_overlap_zscores.txt""),"
-"0","            sep=""\t"",row.names=FALSE, quote=FALSE, col.names = TRUE)"
