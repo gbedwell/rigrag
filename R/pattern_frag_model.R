@@ -62,7 +62,7 @@ pattern_frag_model <- function(df, pattern=c("NASB", "MB")){
 
       total.sites < exp(mean.slope.c) ~
         (exp(mean.slope.b0 - mean.slope.c*mean.slope.b1)*total.sites^mean.slope.b1)*gene.length +
-        ((mean.int.N*total.sites^mean.nt.a) + mean.int.k),
+        ((mean.int.N*total.sites^mean.int.a) + mean.int.k),
 
       total.sites >= exp(mean.slope.c) ~
         (exp(mean.slope.b0 - mean.slope.c*mean.slope.b2)*total.sites^mean.slope.b2)*gene.length +
