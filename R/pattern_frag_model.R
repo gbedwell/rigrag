@@ -12,83 +12,86 @@
 pattern_frag_model <- function(df, pattern=c("NASB", "MB")){
   print(paste0("Pattern is ", pattern))
   if(pattern=="NASB"){
-    dat <- df %>%
-      dplyr::mutate(expected.frac = case_when(
 
-        total.sites < exp(10.023112729) ~
-          (exp(-21.150989669 - 10.023112729*0.042760180)*total.sites^0.042760180)*gene.length +
-          ((4.593904e+00*total.sites^-1.409699e+00) + 7.066821e-07),
-
-        total.sites >= exp(10.023112729) ~
-          (exp(-21.150989669 - 10.023112729*0.001398569)*total.sites^0.001398569)*gene.length +
-          ((4.593904e+00*total.sites^-1.409699e+00) + 7.066821e-07)),
-
-
-        upper.spread = case_when(
-
-          total.sites < exp(10.68573493) ~ ((2.428667e-01*total.sites^-6.999891e-01) + 9.016225e-06) +
-            (((3.200194e+03*total.sites^-2.136769e+00) + 1.661411e-07)*gene.length^
-               (exp(-0.81498460 - 10.68573493*0.24759905)*total.sites^0.24759905)),
-
-          total.sites >= exp(10.68573493) ~ ((2.428667e-01*total.sites^-6.999891e-01) + 9.016225e-06) +
-            (((3.200194e+03*total.sites^-2.136769e+00) + 1.661411e-07)*gene.length^
-               (exp(-0.81498460 - 10.68573493*0.03551543)*total.sites^0.03551543))),
-
-
-        lower.spread = upper.spread,
-
-
-        upper.limit = expected.frac + upper.spread,
-
-        lower.limit = expected.frac - lower.spread,
-
-        lower.limit = replace(lower.limit, lower.limit < 0, 0),
-
-        lower.limit = replace(lower.limit, gene.length < (1.588258e+07*total.sites^-3.910966e-01) + -5.742514e+04, 0),
-
-        outlier.type = case_when(frac.int < upper.limit & frac.int > lower.limit ~ "NONE",
-                                 frac.int > upper.limit ~ "UPPER",
-                                 frac.int < lower.limit ~ "LOWER")) %>%
-      dplyr::select(-c(upper.spread, lower.spread)) }
+      mean.slope.c = 10.012633458
+      mean.slope.b0 = -21.108738592
+      mean.slope.b1 = 0.019483919
+      mean.slope.b2 = 0.002354043
+      mean.int.N = 6.303895e-01
+      mean.int.a = -1.196897e+00
+      mean.int.k = 6.339807e-08
+      spread.a.c = 10.64781989
+      spread.a.b0 = -0.81298244
+      spread.a.b1 = 0.21913184
+      spread.a.b2 = 0.04130661
+      spread.N.N = 9.572647e+02
+      spread.N.a = -2.020024e+00
+      spread.N.k = 1.522057e-07
+      spread.uw.N = 2.846307e-01
+      spread.uw.a = -7.115993e-01
+      spread.uw.k = 1.518783e-05
+      zeroes.N = 1.667800e+07
+      zeroes.a = -3.916833e-01
+      zeroes.k = -5.680890e+04 }
 
   if(pattern=="MB"){
-    dat <- df %>%
-      dplyr::mutate(expected.frac = case_when(
 
-        total.sites < exp(10.039421304) ~
-          (exp(-21.245236519 - 10.039421304*0.051181669)*total.sites^0.051181669)*gene.length +
-          ((4.055190e-01*total.sites^-1.126081e+00) + 3.641413e-06),
+      mean.slope.c = 1.012329e+01
+      mean.slope.b0 = -2.106895e+01
+      mean.slope.b1 = 1.570697e-02
+      mean.slope.b2 = 3.726597e-04
+      mean.int.N = 1.557550e+00
+      mean.int.a = -1.309916e+00
+      mean.int.k = -1.481097e-06
+      spread.a.c = 10.3771405
+      spread.a.b0 = -0.8089277
+      spread.a.b1 = 0.2667871
+      spread.a.b2 = 0.0487804
+      spread.N.N = 1.356586e+04
+      spread.N.a = -2.310493e+00
+      spread.N.k = 1.527404e-07
+      spread.uw.N = 2.421844e-01
+      spread.uw.a = -6.887260e-01
+      spread.uw.k = 1.389093e-06
+      zeroes.N = 1.661793e+07
+      zeroes.a = -3.895366e-01
+      zeroes.k = -5.995046e+04 }
 
-        total.sites >= exp(10.039421304) ~
-          (exp(-21.245236519 - 10.039421304*0.003898347)*total.sites^0.003898347)*gene.length +
-          ((4.055190e-01*total.sites^-1.126081e+00) + 3.641413e-06)),
+  dat <- df %>%
+    dplyr::mutate(expected.frac = case_when(
+
+      total.sites < exp(mean.slope.c) ~
+        (exp(mean.slope.b0 - mean.slope.c*mean.slope.b1)*total.sites^mean.slope.b1)*gene.length +
+        ((mean.int.N*total.sites^mean.nt.a) + mean.int.k),
+
+      total.sites >= exp(mean.slope.c) ~
+        (exp(mean.slope.b0 - mean.slope.c*mean.slope.b2)*total.sites^mean.slope.b2)*gene.length +
+        ((mean.int.N*total.sites^mean.int.a) + mean.int.k)),
 
 
-        upper.spread = case_when(
+      upper.spread = case_when(
 
-          total.sites < exp(10.37650916) ~ ((2.568801e-01*total.sites^-7.070787e-01) + 1.034859e-05) +
-            (((1.456483e+04*total.sites^-2.280417e+00) + 2.454798e-07)*gene.length^
-               (exp(-0.88266617 - 10.37650916*0.32259087)*total.sites^0.32259087)),
+        total.sites < exp(spread.a.c) ~ ((spread.uw.N*total.sites^spread.uw.a) + spread.uw.k) +
+          (((spread.N.N*total.sites^spread.N.a) + spread.N.k)*gene.length^
+             (exp(spread.a.b0 - spread.a.c*spread.a.b1)*total.sites^spread.a.b1)),
 
-          total.sites >= exp(10.37650916) ~ ((2.568801e-01*total.sites^-7.070787e-01) + 1.034859e-05) +
-            (((1.456483e+04*total.sites^-2.280417e+00) + 2.454798e-07)*gene.length^
-               (exp(-0.88266617 - 10.37650916*0.03579225)*total.sites^0.03579225))),
+        total.sites >= exp(spread.a.c) ~ ((spread.uw.N*total.sites^spread.uw.a) + spread.uw.k) +
+          (((spread.N.N*total.sites^spread.N.a) + spread.N.k)*gene.length^
+             (exp(spread.a.b0 - spread.a.c*spread.a.b2)*total.sites^spread.a.b2))),
 
+      lower.spread = upper.spread,
 
-        lower.spread = upper.spread,
+      upper.limit = expected.frac + upper.spread,
 
+      lower.limit = expected.frac - lower.spread,
 
-        upper.limit = expected.frac + upper.spread,
+      lower.limit = replace(lower.limit, lower.limit < 0, 0),
 
-        lower.limit = expected.frac - lower.spread,
+      lower.limit = replace(lower.limit, gene.length < (zeroes.N*total.sites^zeroes.a) + zeroes.k, 0),
 
-        lower.limit = replace(lower.limit, lower.limit < 0, 0),
-
-        lower.limit = replace(lower.limit, gene.length < (1.488892e+07*total.sites^-3.836516e-01) + -6.454891e+04, 0),
-
-        outlier.type = case_when(frac.int < upper.limit & frac.int > lower.limit ~ "NONE",
-                                 frac.int > upper.limit ~ "UPPER",
-                                 frac.int < lower.limit ~ "LOWER")) %>%
-      dplyr::select(-c(upper.spread, lower.spread)) }
+      outlier.type = case_when(frac.int < upper.limit & frac.int > lower.limit ~ "NONE",
+                               frac.int > upper.limit ~ "UPPER",
+                               frac.int < lower.limit ~ "LOWER")) %>%
+    dplyr::select(-c(upper.spread, lower.spread))
 
   return(dat) }

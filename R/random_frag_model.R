@@ -12,31 +12,51 @@
 #' @export
 random_frag_model <- function(df){
   print("Pattern is random")
+
+  mean.slope.c = 9.478231367
+  mean.slope.b0 = -21.080243617
+  mean.slope.b1 = 0.099308243
+  mean.slope.b2 = 0.001392479
+  mean.int.N = 1.372085e+01
+  mean.int.a = -1.535794e+00
+  mean.int.k = -1.076369e-06
+  spread.a.c = 10.41544528
+  spread.a.b0 = -0.81456301
+  spread.a.b1 = 0.24888476
+  spread.a.b2 = 0.04385694
+  spread.N.N = 2.930537e+02
+  spread.N.a = -1.906554e+00
+  spread.N.k = 1.210055e-07
+  spread.uw.N = 2.949172e-01
+  spread.uw.a = -7.094517e-01
+  spread.uw.k = 2.482763e-06
+  zeroes.N = 1.633124e+07
+  zeroes.a = -3.887341e-01
+  zeroes.k = -6.077641e+04
+
   dat <- df %>%
     dplyr::mutate(expected.frac = case_when(
 
-      total.sites < exp(10.051250567) ~
-        (exp(-21.125319132 - 10.051250567*0.036524692)*total.sites^0.036524692)*gene.length +
-        ((1.188053e+01*total.sites^-1.520168e+00) + -3.238539e-07),
+      total.sites < exp(mean.slope.c) ~
+        (exp(mean.slope.b0 - mean.slope.c*mean.slope.b1)*total.sites^mean.slope.b1)*gene.length +
+        ((mean.int.N*total.sites^mean.nt.a) + mean.int.k),
 
-      total.sites >= exp(10.051250567) ~
-        (exp(-21.125319132 - 10.051250567*0.001037773)*total.sites^0.001037773)*gene.length +
-        ((1.188053e+01*total.sites^-1.520168e+00) + -3.238539e-07)),
+      total.sites >= exp(mean.slope.c) ~
+        (exp(mean.slope.b0 - mean.slope.c*mean.slope.b2)*total.sites^mean.slope.b2)*gene.length +
+        ((mean.int.N*total.sites^mean.int.a) + mean.int.k)),
 
 
       upper.spread = case_when(
 
-        total.sites < exp(10.63798039) ~ ((2.124986e-01*total.sites^-6.817895e-01) + -3.264780e-06) +
-          (((5.748894e+03*total.sites^-2.210068e+00) + 1.751955e-07)*gene.length^
-             (exp(-0.81554604 - 10.63798039*0.22855264)*total.sites^0.22855264)),
+        total.sites < exp(spread.a.c) ~ ((spread.uw.N*total.sites^spread.uw.a) + spread.uw.k) +
+          (((spread.N.N*total.sites^spread.N.a) + spread.N.k)*gene.length^
+             (exp(spread.a.b0 - spread.a.c*spread.a.b1)*total.sites^spread.a.b1)),
 
-        total.sites >= exp(10.63798039) ~ ((2.124986e-01*total.sites^-6.817895e-01) + -3.264780e-06) +
-          (((5.748894e+03*total.sites^-2.210068e+00) + 1.751955e-07)*gene.length^
-             (exp(-0.81554604 - 10.63798039*0.03961336)*total.sites^0.03961336))),
-
+        total.sites >= exp(spread.a.c) ~ ((spread.uw.N*total.sites^spread.uw.a) + spread.uw.k) +
+          (((spread.N.N*total.sites^spread.N.a) + spread.N.k)*gene.length^
+             (exp(spread.a.b0 - spread.a.c*spread.a.b2)*total.sites^spread.a.b2))),
 
       lower.spread = upper.spread,
-
 
       upper.limit = expected.frac + upper.spread,
 
@@ -44,7 +64,7 @@ random_frag_model <- function(df){
 
       lower.limit = replace(lower.limit, lower.limit < 0, 0),
 
-      lower.limit = replace(lower.limit, gene.length < (1.543353e+07*total.sites^-3.866596e-01) + -6.214747e+04, 0),
+      lower.limit = replace(lower.limit, gene.length < (zeroes.N*total.sites^zeroes.a) + zeroes.k, 0),
 
       outlier.type = case_when(frac.int < upper.limit & frac.int > lower.limit ~ "NONE",
                                frac.int > upper.limit ~ "UPPER",

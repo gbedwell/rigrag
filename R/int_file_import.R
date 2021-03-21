@@ -21,12 +21,32 @@ int_file_import <- function(files, sample.ids, collapsed = c(TRUE, FALSE)){
   sample.list <- Map(cbind, sample.list, sample = sample.ids)
 
   if(collapsed==FALSE){
-    sample.df <- data.table::rbindlist(sample.list) %>% dplyr::group_by(sample) %>% dplyr::add_count(sample, name="genic.sites")
+    sample.df <- data.table::rbindlist(sample.list) %>%
+      magrittr::set_colnames(c("chromosome","int.start","int.end","int.strand","gene.name",
+                               "gene.start","gene.end","gene.strand","total.sites","sample")) %>%
+      dplyr::mutate(gene.length = gene.end-gene.start) %>%
+      dplyr::group_by(sample, chromosome, int.start, int.strand) %>%
+      dplyr::filter(gene.length == max(gene.length)) %>%
+      dplyr::ungroup() %>%
+      dplyr::select(-c(gene.length)) %>%
+      dplyr::group_by(sample) %>%
+      dplyr::add_count(sample, name="genic.sites") %>%
+      dplyr::ungroup()
     colnames(sample.df) <- c("chromosome","int.start","int.end","int.strand","gene.name",
                              "gene.start","gene.end","gene.strand","total.sites","sample","genic.sites") }
 
   if(collapsed==TRUE){
-    sample.df <- data.table::rbindlist(sample.list) %>% dplyr::group_by(sample) %>% dplyr::add_count(sample, name="genic.sites")
+    sample.df <- data.table::rbindlist(sample.list) %>%
+      magrittr::set_colnames(c("chromosome","int.start","int.end","int.strand","gene.name",
+                               "gene.start","gene.end","gene.strand","total.sites","sample")) %>%
+      dplyr::mutate(gene.length = gene.end-gene.start) %>%
+      dplyr::group_by(sample, chromosome, int.start, int.strand) %>%
+      dplyr::filter(gene.length == max(gene.length)) %>%
+      dplyr::ungroup() %>%
+      dplyr::select(-c(gene.length)) %>%
+      dplyr::group_by(sample) %>%
+      dplyr::add_count(sample, name="genic.sites") %>%
+      dplyr::ungroup()
     colnames(sample.df) <- c("chromosome","int.start","int.end","int.strand","gene.name",
                              "gene.start","gene.end","gene.strand","total.sites","sample","genic.sites")
 
@@ -37,7 +57,7 @@ int_file_import <- function(files, sample.ids, collapsed = c(TRUE, FALSE)){
       dplyr::ungroup() %>%
       dplyr::select(-c(chromosome, int.start, int.end, int.strand)) %>%
       dplyr::mutate(frac.int = int.counts/genic.sites) %>%
-      dplyr::mutate(gene.length = (gene.end - gene.start) + 1) %>%
+      dplyr::mutate(gene.length = gene.end - gene.start) %>%
       dplyr::arrange(sample) }
 
   return(sample.df)
