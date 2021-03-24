@@ -13,49 +13,49 @@ pattern_frag_model <- function(df, pattern=c("NASB", "MB")){
   print(paste0("Pattern is ", pattern))
   if(pattern=="NASB"){
 
-      mean.slope.c = 10.012633458
-      mean.slope.b0 = -21.108738592
-      mean.slope.b1 = 0.019483919
-      mean.slope.b2 = 0.002354043
-      mean.int.N = 6.303895e-01
-      mean.int.a = -1.196897e+00
-      mean.int.k = 6.339807e-08
-      spread.a.c = 10.64781989
-      spread.a.b0 = -0.81298244
-      spread.a.b1 = 0.21913184
-      spread.a.b2 = 0.04130661
-      spread.N.N = 9.572647e+02
-      spread.N.a = -2.020024e+00
-      spread.N.k = 1.522057e-07
-      spread.uw.N = 2.846307e-01
-      spread.uw.a = -7.115993e-01
-      spread.uw.k = 1.518783e-05
-      zeroes.N = 1.667800e+07
-      zeroes.a = -3.916833e-01
-      zeroes.k = -5.680890e+04 }
+      mean.slope.c = 1.062591e+01
+      mean.slope.b0 = -2.109951e+01
+      mean.slope.b1 = 1.419552e-02
+      mean.slope.b2 = 7.373111e-04
+      mean.int.N = 8.907227e-01
+      mean.int.a = -1.236737e+00
+      mean.int.k = 7.155503e-07
+      spread.a.c = 10.41224339
+      spread.a.b0 = -0.83053680
+      spread.a.b1 = 0.29211443
+      spread.a.b2 = 0.03722969
+      spread.N.N = 1.216210e+04
+      spread.N.a = -2.281313e+00
+      spread.N.k = 1.906715e-07
+      spread.uw.N = 2.843457e-01
+      spread.uw.a = -7.115858e-01
+      spread.uw.k = 1.260564e-05
+      zeroes.N = 1.500378e+07
+      zeroes.a = -3.843191e-01
+      zeroes.k = -5.899074e+04 }
 
   if(pattern=="MB"){
 
-      mean.slope.c = 1.012329e+01
-      mean.slope.b0 = -2.106895e+01
-      mean.slope.b1 = 1.570697e-02
-      mean.slope.b2 = 3.726597e-04
-      mean.int.N = 1.557550e+00
-      mean.int.a = -1.309916e+00
-      mean.int.k = -1.481097e-06
-      spread.a.c = 10.3771405
-      spread.a.b0 = -0.8089277
-      spread.a.b1 = 0.2667871
-      spread.a.b2 = 0.0487804
-      spread.N.N = 1.356586e+04
-      spread.N.a = -2.310493e+00
-      spread.N.k = 1.527404e-07
-      spread.uw.N = 2.421844e-01
-      spread.uw.a = -6.887260e-01
-      spread.uw.k = 1.389093e-06
-      zeroes.N = 1.661793e+07
-      zeroes.a = -3.895366e-01
-      zeroes.k = -5.995046e+04 }
+      mean.slope.c = 10.300985961
+      mean.slope.b0 = -21.068387171
+      mean.slope.b1 = 0.028349258
+      mean.slope.b2 = 0.001733579
+      mean.int.N = 1.926378e+00
+      mean.int.a = -1.316746e+00
+      mean.int.k = -7.921794e-07
+      spread.a.c = 10.60512491
+      spread.a.b0 = -0.80427803
+      spread.a.b1 = 0.22991466
+      spread.a.b2 = 0.03864262
+      spread.N.N = 2.096778e+03
+      spread.N.a = -2.105591e+00
+      spread.N.k = 1.569561e-07
+      spread.uw.N = 2.590415e-01
+      spread.uw.a = -6.984847e-01
+      spread.uw.k = 8.456193e-07
+      zeroes.N = 1.706085e+07
+      zeroes.a = -3.981275e-01
+      zeroes.k = -5.489989e+04 }
 
   dat <- df %>%
     dplyr::mutate(expected.frac = case_when(
@@ -94,4 +94,4 @@ pattern_frag_model <- function(df, pattern=c("NASB", "MB")){
                                frac.int < lower.limit ~ "LOWER")) %>%
     dplyr::select(-c(upper.spread, lower.spread))
 
-  return(dat) }
+    return(dat) }

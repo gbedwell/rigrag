@@ -13,26 +13,26 @@
 random_frag_model <- function(df){
   print("Pattern is random")
 
-  mean.slope.c = 9.478231367
-  mean.slope.b0 = -21.080243617
-  mean.slope.b1 = 0.099308243
-  mean.slope.b2 = 0.001392479
-  mean.int.N = 1.372085e+01
-  mean.int.a = -1.535794e+00
-  mean.int.k = -1.076369e-06
-  spread.a.c = 10.41544528
-  spread.a.b0 = -0.81456301
-  spread.a.b1 = 0.24888476
-  spread.a.b2 = 0.04385694
-  spread.N.N = 2.930537e+02
-  spread.N.a = -1.906554e+00
-  spread.N.k = 1.210055e-07
-  spread.uw.N = 2.949172e-01
-  spread.uw.a = -7.094517e-01
-  spread.uw.k = 2.482763e-06
-  zeroes.N = 1.633124e+07
-  zeroes.a = -3.887341e-01
-  zeroes.k = -6.077641e+04
+  mean.slope.c = 10.063374867
+  mean.slope.b0 = -21.076007139
+  mean.slope.b1 = 0.028831339
+  mean.slope.b2 = 0.001014249
+  mean.int.N = 4.087734e+00
+  mean.int.a = -1.406865e+00
+  mean.int.k = -3.564851e-07
+  spread.a.c = 10.40539922
+  spread.a.b0 = -0.81944351
+  spread.a.b1 = 0.30664942
+  spread.a.b2 = 0.03584601
+  spread.N.N = 4.476102e+04
+  spread.N.a = -2.418692e+00
+  spread.N.k = 1.851318e-07
+  spread.uw.N = 2.184841e-01
+  spread.uw.a = -6.809913e-01
+  spread.uw.k = -2.118804e-06
+  zeroes.N = 1.502502e+07
+  zeroes.a = -3.837643e-01
+  zeroes.k = -6.218569e+04
 
   dat <- df %>%
     dplyr::mutate(expected.frac = case_when(
