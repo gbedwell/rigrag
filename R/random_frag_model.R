@@ -13,26 +13,26 @@
 random_frag_model <- function(df){
   print("Pattern is random")
 
-  mean.slope.c = 10.063374867
-  mean.slope.b0 = -21.076007139
-  mean.slope.b1 = 0.028831339
-  mean.slope.b2 = 0.001014249
-  mean.int.N = 4.087734e+00
-  mean.int.a = -1.406865e+00
-  mean.int.k = -3.564851e-07
-  spread.a.c = 10.40539922
-  spread.a.b0 = -0.81944351
-  spread.a.b1 = 0.30664942
-  spread.a.b2 = 0.03584601
-  spread.N.N = 4.476102e+04
-  spread.N.a = -2.418692e+00
-  spread.N.k = 1.851318e-07
-  spread.uw.N = 2.184841e-01
-  spread.uw.a = -6.809913e-01
-  spread.uw.k = -2.118804e-06
-  zeroes.N = 1.502502e+07
-  zeroes.a = -3.837643e-01
-  zeroes.k = -6.218569e+04
+  mean.slope.c = 1.037016e+01
+  mean.slope.b0 = -2.107221e+01
+  mean.slope.b1 = 2.106187e-02
+  mean.slope.b2 = 6.916413e-04
+  mean.int.N = 4.660288e+00
+  mean.int.a = -1.420851e+00
+  mean.int.k = -3.767298e-07
+  spread.a.c = 10.4039228
+  spread.a.b0 = -0.8286006
+  spread.a.b1 = 0.3121792
+  spread.a.b2 = 0.0405448
+  spread.N.N = 1.201679e+04
+  spread.N.a = -2.273101e+00
+  spread.N.k = 1.764438e-07
+  resid.uw.N = 2.334132e-01
+  resid.uw.a = -6.871296e-01
+  resid.uw.k = -2.516485e-06
+  zeroes.N = 1.515543e+07
+  zeroes.a = -3.845674e-01
+  zeroes.k = -6.315229e+04
 
   dat <- df %>%
     dplyr::mutate(expected.frac = case_when(
@@ -48,11 +48,11 @@ random_frag_model <- function(df){
 
       upper.spread = case_when(
 
-        total.sites < exp(spread.a.c) ~ ((spread.uw.N*total.sites^spread.uw.a) + spread.uw.k) +
+        total.sites < exp(spread.a.c) ~ ((resid.uw.N*total.sites^resid.uw.a) + resid.uw.k) +
           (((spread.N.N*total.sites^spread.N.a) + spread.N.k)*gene.length^
              (exp(spread.a.b0 - spread.a.c*spread.a.b1)*total.sites^spread.a.b1)),
 
-        total.sites >= exp(spread.a.c) ~ ((spread.uw.N*total.sites^spread.uw.a) + spread.uw.k) +
+        total.sites >= exp(spread.a.c) ~ ((resid.uw.N*total.sites^resid.uw.a) + resid.uw.k) +
           (((spread.N.N*total.sites^spread.N.a) + spread.N.k)*gene.length^
              (exp(spread.a.b0 - spread.a.c*spread.a.b2)*total.sites^spread.a.b2))),
 

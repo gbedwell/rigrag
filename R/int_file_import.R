@@ -21,12 +21,18 @@ int_file_import <- function(files, sample.ids, collapsed = c(TRUE, FALSE)){
   sample.list <- Map(cbind, sample.list, sample = sample.ids)
 
   if(collapsed==FALSE){
-    sample.df <- data.table::rbindlist(sample.list) %>% dplyr::group_by(sample) %>% dplyr::add_count(sample, name="genic.sites")
+    sample.df <- data.table::rbindlist(sample.list) %>%
+      dplyr::group_by(sample) %>%
+      dplyr::mutate(genic.sites=n_distinct(int.start))
+
     colnames(sample.df) <- c("chromosome","int.start","int.end","int.strand","gene.name",
                              "gene.start","gene.end","gene.strand","total.sites","sample","genic.sites") }
 
   if(collapsed==TRUE){
-    sample.df <- data.table::rbindlist(sample.list) %>% dplyr::group_by(sample) %>% dplyr::add_count(sample, name="genic.sites")
+    sample.df <- data.table::rbindlist(sample.list) %>%
+      dplyr::group_by(sample) %>%
+      dplyr::mutate(genic.sites=n_distinct(int.start))
+
     colnames(sample.df) <- c("chromosome","int.start","int.end","int.strand","gene.name",
                              "gene.start","gene.end","gene.strand","total.sites","sample","genic.sites")
 
