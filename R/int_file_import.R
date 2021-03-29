@@ -22,17 +22,17 @@ int_file_import <- function(files, sample.ids, collapsed = c(TRUE, FALSE)){
 
   if(collapsed==FALSE){
     sample.df <- data.table::rbindlist(sample.list) %>%
-      dplyr::group_by(sample) %>%
       magrittr::set_colnames(c("chromosome","int.start","int.end","int.strand","gene.name",
                                "gene.start","gene.end","gene.strand","total.sites","sample")) %>%
-      dplyr::mutate(genic.sites=n_distinct(int.start)) }
+      dplyr::group_by(sample) %>%
+      dplyr::mutate(genic.sites=n_distinct(chromosome, int.start, int.strand)) }
 
   if(collapsed==TRUE){
     sample.df <- data.table::rbindlist(sample.list) %>%
-      dplyr::group_by(sample) %>%
       magrittr::set_colnames(c("chromosome","int.start","int.end","int.strand","gene.name",
                                "gene.start","gene.end","gene.strand","total.sites","sample")) %>%
-      dplyr::mutate(genic.sites=n_distinct(int.start))
+      dplyr::group_by(sample) %>%
+      dplyr::mutate(genic.sites=n_distinct(chromosome, int.start, int.strand))
 
     sample.df <- sample.df %>%
       dplyr::group_by(gene.name, sample) %>%
