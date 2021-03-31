@@ -11,7 +11,7 @@ cross_sample_occurrence(
 )
 }
 \arguments{
-\item{df}{The dataframe generated with \code{random_frag_model()} that contains the outlier information.}
+\item{df}{The dataframe generated with \code{random_frag_model()} or \code{pattern_frag_model()} that contains the outlier information.}
 
 \item{output.type}{Determines whether the output is the cross-sample occurrence across each gene in each sample (\code{"by_gene"}) or a summary of the cross-sample occurrences across samples (\code{"summary"}).}
 

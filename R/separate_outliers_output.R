@@ -12,29 +12,33 @@
 #' @export
 separate_outliers_output <- function(df, outliers=c("both","upper","lower"), output.dir=NULL){
   if(is.null(output.dir)){
-    if(outliers=="BOTH"){
-      dat <- df %>% dplyr::group_by(sample) %>%
+    if(outliers=="both"){
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "UPPER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", mgsub(as.character(.y$sample),c(" ", "#","+"),c("_","","")),"_upper_outliers.txt")),
                           append = FALSE, sep = "\t", row.names=FALSE,
                           col.names=TRUE, quote=FALSE)
 
-      dat <- df %>% dplyr::group_by(sample) %>%
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "LOWER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", mgsub(as.character(.y$sample),c(" ", "#","+"),c("_","","")),"_lower_outliers.txt")),
                           append = FALSE, sep = "\t", row.names=FALSE,
                           col.names=TRUE, quote=FALSE) }
-    if(outliers=="UPPER"){
-      dat <- df %>% dplyr::group_by(sample) %>%
+    if(outliers=="upper"){
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "UPPER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", mgsub(as.character(.y$sample),c(" ", "#","+"),c("_","","")),"_upper_outliers.txt")),
                           append = FALSE, sep = "\t", row.names=FALSE,
                           col.names=TRUE, quote=FALSE) }
-    if(outliers=="LOWER"){
-      dat <- df %>% dplyr::group_by(sample) %>%
+    if(outliers=="lower"){
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "LOWER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", mgsub(as.character(.y$sample),c(" ", "#", "+"),c("_","","")),"_lower_outliers.txt")),
@@ -42,30 +46,34 @@ separate_outliers_output <- function(df, outliers=c("both","upper","lower"), out
                           col.names=TRUE, quote=FALSE) } }
 
   else{
-    if(outliers=="BOTH"){
-      dat <- df %>% dplyr::group_by(sample) %>%
+    if(outliers=="both"){
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "UPPER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", output.dir, "/", mgsub(as.character(.y$sample),c(" ", "#","+"),c("_","","")),"_upper_outliers.txt")),
                           append = FALSE, sep = "\t", row.names=FALSE,
                           col.names=TRUE, quote=FALSE)
 
-      dat <- df %>% dplyr::group_by(sample) %>%
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "LOWER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", output.dir, "/", mgsub(as.character(.y$sample),c(" ", "#","+"),c("_","","")),"_lower_outliers.txt")),
                           append = FALSE, sep = "\t", row.names=FALSE,
                           col.names=TRUE, quote=FALSE) }
 
-    if(outliers=="UPPER"){
-      dat <- df %>% dplyr::group_by(sample) %>%
+    if(outliers=="upper"){
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "UPPER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", output.dir, "/", mgsub(as.character(.y$sample),c(" ", "#","+"),c("_","","")),"_upper_outliers.txt")),
                           append = FALSE, sep = "\t", row.names=FALSE,
                           col.names=TRUE, quote=FALSE) }
-    if(outliers=="LOWER"){
-      dat <- df %>% dplyr::group_by(sample) %>%
+    if(outliers=="lower"){
+      dat <- df %>%
+        dplyr::group_by(sample) %>%
         dplyr::filter(outlier.type == "LOWER") %>%
         dplyr::select(gene.name) %>%
         dplyr::group_walk(~ write.table(.x, file = paste0(getwd(),"/", output.dir, "/", mgsub(as.character(.y$sample),c(" ", "#", "+"),c("_","","")),"_lower_outliers.txt")),

@@ -2,9 +2,9 @@
 #'
 #' Calculates the overlap in outlier genes across each sample.
 #'
-#'@param df The dataframe generated with \code{random_frag_model()} that contains the outlier information.
-#'@param uo_list The combined list of genes corresponding to upper outliers. Requires a "gene.name" column header.
-#'@param lo_list The combined list of genes corresponding to lower outliers. Requires a "gene.name" column header.
+#'@param df The dataframe generated with \code{random_frag_model()} or \code{pattern_frag_model()} that contains the outlier information.
+#'@param uo_list The combined list of genes corresponding to upper outliers. Requires a "gene.name" column header. Easily generated using the \code{cross_sample_occurrence()} function.
+#'@param lo_list The combined list of genes corresponding to lower outliers. Requires a "gene.name" column header. Easily generated using the \code{cross_sample_occurrence()} function.
 #'
 #'
 #'

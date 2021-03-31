@@ -2,7 +2,7 @@
 #'
 #' Calculates the overlap in outlier genes across each sample.
 #'
-#'@param df The dataframe generated with \code{random_frag_model()} that contains the outlier information.
+#'@param df The dataframe generated with \code{random_frag_model()} or \code{pattern_frag_model()} that contains the outlier information.
 #'@param output.type Determines whether the output is the cross-sample occurrence across each gene in each sample (\code{"by_gene"}) or a summary of the cross-sample occurrences across samples (\code{"summary"}).
 #'@param outlier.type Determines whether cross-sample occurrence is calculated for each outlier type (\code{"UPPER"}, \code{"LOWER"}, \code{"NONE"}).
 #'
@@ -103,8 +103,8 @@ cross_sample_occurrence <- function(df, output.type=c("by_gene", "summary"), out
       return(non.outliers) }
 
     if(output.type=="summary"){
-      print("This output might contain upper or lower outliers that were not identified as such in a given sample!")
-      print("Use the by_gene option and filter against known upper and lower outliers to obtain unique non-outlier counts!")
+      print("This output might contain upper or lower outliers that were identified as such in other samples!")
+      print("Use the by_gene option and filter against upper and lower outliers to obtain unique non-outlier counts!")
       non.outliers <- df %>%
         dplyr::filter(outlier.type == "NONE") %>%
         dplyr::select(gene.name, sample) %>%

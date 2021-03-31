@@ -11,27 +11,35 @@
 #' @export
 outliers_output <- function(df, output.dir=NULL, file.prefix){
   if(is.null(output.dir)){
-    dat <- df %>% dplyr::filter(outlier.type == "UPPER") %>%
+    dat <- df %>%
+      dplyr::filter(outlier.type == "UPPER") %>%
       dplyr::select(gene.name) %>%
       dplyr::distinct(gene.name) %>%
+      dplyr::arrange(gene.name) %>%
       dplyr::group_walk(~write.table(.x, file = paste0(getwd(), "/", file.prefix,"_upper_outliers.txt"),
                                      append = FALSE, sep = "\t", row.names=FALSE, col.names=FALSE, quote=FALSE))
 
-    dat <- df %>% dplyr::filter(outlier.type == "LOWER") %>%
+    dat <- df %>%
+      dplyr::filter(outlier.type == "LOWER") %>%
       dplyr::select(gene.name) %>%
       dplyr::distinct(gene.name) %>%
+      dplyr::arrange(gene.name) %>%
       dplyr::group_walk(~write.table(.x, file = paste0(getwd(), "/", file.prefix,"_lower_outliers.txt"),
                                      append = FALSE, sep = "\t", row.names=FALSE, col.names=FALSE, quote=FALSE)) }
   else{
-    dat <- df %>% dplyr::filter(outlier.type == "UPPER") %>%
+    dat <- df %>%
+      dplyr::filter(outlier.type == "UPPER") %>%
       dplyr::select(gene.name) %>%
       dplyr::distinct(gene.name) %>%
+      dplyr::arrange(gene.name) %>%
       dplyr::group_walk(~write.table(.x, file = paste0(getwd(), "/", output.dir, "/", file.prefix,"_upper_outliers.txt"),
                                      append = FALSE, sep = "\t", row.names=FALSE, col.names=FALSE, quote=FALSE))
 
-    dat <- df %>% dplyr::filter(outlier.type == "LOWER") %>%
+    dat <- df %>%
+      dplyr::filter(outlier.type == "LOWER") %>%
       dplyr::select(gene.name) %>%
       dplyr::distinct(gene.name) %>%
+      dplyr::arrange(gene.name) %>%
       dplyr::group_walk(~write.table(.x, file = paste0(getwd(), "/", output.dir, "/", file.prefix,"_lower_outliers.txt"),
                                      append = FALSE, sep = "\t", row.names=FALSE, col.names=FALSE, quote=FALSE)) }
 }

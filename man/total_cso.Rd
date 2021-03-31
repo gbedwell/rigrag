@@ -7,11 +7,11 @@
 total_cso(df, uo_list, lo_list)
 }
 \arguments{
-\item{df}{The dataframe generated with \code{random_frag_model()} that contains the outlier information.}
+\item{df}{The dataframe generated with \code{random_frag_model()} or \code{pattern_frag_model()} that contains the outlier information.}
 
-\item{uo_list}{The combined list of genes corresponding to upper outliers. Requires a "gene.name" column header.}
+\item{uo_list}{The combined list of genes corresponding to upper outliers. Requires a "gene.name" column header. Easily generated using the \code{cross_sample_occurrence()} function.}
 
-\item{lo_list}{The combined list of genes corresponding to lower outliers. Requires a "gene.name" column header.}
+\item{lo_list}{The combined list of genes corresponding to lower outliers. Requires a "gene.name" column header. Easily generated using the \code{cross_sample_occurrence()} function.}
 }
 \description{
 Calculates the overlap in outlier genes across each sample.
