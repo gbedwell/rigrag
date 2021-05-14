@@ -25,7 +25,8 @@ int_file_import <- function(files, sample.ids, collapsed = c(TRUE, FALSE)){
       magrittr::set_colnames(c("chromosome","int.start","int.end","int.strand","gene.name",
                                "gene.start","gene.end","gene.strand","total.sites","sample")) %>%
       dplyr::group_by(sample) %>%
-      dplyr::mutate(genic.sites=n_distinct(chromosome, int.start, int.strand)) }
+      dplyr::mutate(genic.sites=n_distinct(chromosome, int.start, int.strand)) %>%
+      dplyr::ungroup() }
 
   if(collapsed==TRUE){
     sample.df <- data.table::rbindlist(sample.list) %>%
